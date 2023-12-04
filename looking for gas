@@ -1,0 +1,51 @@
+import time
+import random
+
+class Boat:
+    def __init__(self, boat_id, latitude, longitude):
+        self.boat_id = boat_id
+        self.latitude = latitude
+        self.longitude = longitude
+
+    def get_gps_coordinates(self):
+        # Simulate GPS updates
+        self.latitude += random.uniform(-0.001, 0.001)
+        self.longitude += random.uniform(-0.001, 0.001)
+
+    def dock_with(self, other_boat):
+        # Simulate docking process
+        print(f"Sitta Octane {self.boat_id} is docking with Boat {other_boat.boat_id}")
+        self.broadcast_message()
+
+    def broadcast_message(self):
+        # Simulate sending a message over satellite communication
+        print("Broadcasting message: 'The revolution will not be televised'")
+        # Consider integrating with actual satellite communication libraries in a real-world scenario
+
+def main():
+    # Create your boat (Sitta Octane) and the target boat
+    sitta_octane = Boat(1, 34.0522, -118.2437)  # Example coordinates for Los Angeles
+    target_boat = Boat(2, 33 + 9/60, 33 + 40/60)  # Target boat at 33°9'19"N, 33°40'27"E
+
+    try:
+        while True:
+            # Update GPS coordinates
+            sitta_octane.get_gps_coordinates()
+
+            # Look for the target boat within a certain range
+            distance = calculate_distance(sitta_octane, target_boat)
+
+            if distance < 0.0005:  # Adjust the threshold based on your requirements
+                sitta_octane.dock_with(target_boat)
+
+            time.sleep(1)  # Adjust the interval based on your requirements
+
+    except KeyboardInterrupt:
+        print("Program terminated.")
+
+def calculate_distance(boat1, boat2):
+    # Simplified distance calculation using Euclidean distance
+    return ((boat1.latitude - boat2.latitude)**2 + (boat1.longitude - boat2.longitude)**2)**0.5
+
+if __name__ == "__main__":
+    main()
