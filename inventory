@@ -1,0 +1,32 @@
+Qaulitycontrol.py
+pip install python-barcode
+import barcode
+from barcode.writer import ImageWriter
+
+def generate_barcode_image(barcode_data, filename='barcode'):
+    # Generate barcode image
+    code = barcode.get('code128', barcode_data, writer=ImageWriter(), add_checksum=False)
+    filename_with_extension = f'{filename}.png'
+    code.save(filename_with_extension)
+
+def filter_barcode(barcode_data):
+    # Filter barcodes starting with '729' or '871'
+    return barcode_data.startswith('729') or barcode_data.startswith('871')
+
+# Example barcodes
+barcodes = ['729123456789', '871987654321', '123456789012']
+
+# List to store filtered barcodes
+filtered_barcodes = []
+
+# Process barcodes
+for barcode_data in barcodes:
+    if filter_barcode(barcode_data):
+        filtered_barcodes.append(barcode_data)
+
+# Print the filtered barcodes
+print("Filtered Barcodes:", filtered_barcodes)
+
+# Optional: Generate barcode images
+for barcode_data in filtered_barcodes:
+    generate_barcode_image(barcode_data)
