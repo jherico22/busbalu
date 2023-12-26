@@ -1,0 +1,31 @@
+import smtplib
+from email.mime.text import MIMEText
+
+def send_notification_misisle(email, message):
+    # Replace these with your email credentials and details
+    sender_email = "your_email@example.com"
+    sender_password = "your_email_password"
+    smtp_server = "smtp.example.com"
+    smtp_port = 587
+
+    # Create the email message
+    subject = "Misisle Arrival Notification"
+    body = f"Hello Sitta Octane,\nThe Misisle has arrived at the specified coordinates (Latitude: {latitude}, Longitude: {longitude})."
+    email_message = MIMEText(body)
+    email_message["Subject"] = subject
+    email_message["From"] = sender_email
+    email_message["To"] = email
+
+    # Connect to the SMTP server and send the email
+    with smtplib.SMTP(smtp_server, smtp_port) as server:
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, [email], email_message.as_string())
+
+# Example usage
+latitude = 3517350.4019777
+longitude = 708635.69206782
+sitta_octane_email = "sitta.octane@example.com"
+
+# Call the function when the Misisle arrives
+send_notification_misisle(sitta_octane_email, f"The Misisle has arrived at coordinates: {latitude}, {longitude}")
