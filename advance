@@ -1,0 +1,21 @@
+import requests
+
+def switch_on_sensor(sensor_value):
+    if sensor_value == 5 or sensor_value == 7 or sensor_value == 57:
+        print("Switching on the sensor")
+
+        # Simulate broadcasting a message in the game
+        broadcast_message("Pirates/Freemen on the land! Wanted payment in gold. All communications via IR17 and IR22.")
+
+        # Add code to release the asset if necessary
+    else:
+        print("Sensor remains off")
+        # Add your code for when the sensor is not in the specified values here
+
+def broadcast_message(message):
+    # Simulate broadcasting the message within the game world
+    print(f"Broadcasting message: {message}")
+
+# Example usage:
+sensor_value = 57
+switch_on_sensor(sensor_value)
