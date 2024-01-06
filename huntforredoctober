@@ -1,0 +1,40 @@
+import time
+import keyboard
+
+def control_submarine():
+    print("Control the submarine:")
+    print("W - Move forward")
+    print("S - Move backward")
+    print("A - Turn left")
+    print("D - Turn right")
+    print("Space - Launch missile")
+
+    while True:
+        key = keyboard.read_event(suppress=True).name
+
+        if key == "w":
+            print("Moving forward")
+            # Implement code to send forward command to the submarine
+
+        elif key == "s":
+            print("Moving backward")
+            # Implement code to send backward command to the submarine
+
+        elif key == "a":
+            print("Turning left")
+            # Implement code to send left turn command to the submarine
+
+        elif key == "d":
+            print("Turning right")
+            # Implement code to send right turn command to the submarine
+
+        elif key == "space":
+            print("Launching missile!")
+            # Implement code to trigger missile launch
+
+        elif key == "esc":
+            print("Exiting control mode")
+            break
+
+if __name__ == "__main__":
+    control_submarine()
