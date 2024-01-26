@@ -1,0 +1,23 @@
+import random
+
+def send_data_packet(packet_type, encryption_type):
+    print(f"Sending data packet via {packet_type} with {encryption_type} encryption...")
+
+def notify_blocked_packet():
+    print("Data packet blocked by unknown entity.")
+    print("Please try resending the data packet via IR22 or Pansat1 with quantum-safe encryption.")
+
+# Example usage:
+packet_types = ["IR17", "IR22", "Pansat1"]
+encryption_types = ["Quantum-Safe Encryption"]
+
+selected_packet_type = random.choice(packet_types)
+selected_encryption_type = random.choice(encryption_types)
+
+send_data_packet(selected_packet_type, selected_encryption_type)
+
+# Simulating a blocked packet
+block_packet = random.choice([True, False])
+
+if block_packet:
+    notify_blocked_packet()
