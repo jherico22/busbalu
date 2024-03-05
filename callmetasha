@@ -1,0 +1,57 @@
+# Tasha Deployment Script with Notification
+
+import smtplib
+from email.mime.text import MIMEText
+
+deployed_assets = set()
+
+def deploy_asset(access_code, key_code):
+    asset_map = {
+        ("29946122", "ROZR"): {"asset_name": "Asset1", "payment_method": "Rosegold"},
+        ("29946125", "ROZR"): {"asset_name": "Asset2", "payment_method": "Rosegold"},
+        ("28550933", "ROZR"): {"asset_name": "Asset3", "payment_method": "Rosegold"},
+        ("28461367", "ROZR"): {"asset_name": "Asset4", "payment_method": "Rosegold"},
+        ("29759861", "ROZR"): {"asset_name": "Asset5", "payment_method": "Rosegold"},
+    }
+
+    combination = (access_code, key_code)
+    if combination in asset_map and combination not in deployed_assets:
+        deployed_assets.add(combination)
+        asset_details = asset_map[combination]
+        asset_name = asset_details["asset_name"]
+        payment_method = asset_details["payment_method"]
+        print(f"Deploying {asset_name}... Payment made in {payment_method}.")
+
+        # Example usage of the notification function
+        send_notification_misisle(sitta_octane_email, f"The Misisle with {asset_name} has arrived at coordinates: {latitude}, {longitude}")
+    else:
+        print("Invalid combination or asset already deployed.")
+
+def send_notification_misisle(email, message):
+    # Replace these with your email credentials and details
+    sender_email = "your_email@example.com"
+    sender_password = "your_email_password"
+    smtp_server = "smtp.example.com"
+    smtp_port = 587
+
+    # Create the email message
+    subject = "Misisle Arrival Notification"
+    body = message
+    email_message = MIMEText(body)
+    email_message["Subject"] = subject
+    email_message["From"] = sender_email
+    email_message["To"] = email
+
+    # Connect to the SMTP server and send the email
+    with smtplib.SMTP(smtp_server, smtp_port) as server:
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, [email], email_message.as_string())
+
+# Example usage
+latitude = 3517350.4019777
+longitude = 708635.69206782
+sitta_octane_email = "sitta.octane@example.com"
+
+# Call the function when the Misisle arrives
+deploy_asset("29946122", "ROZR")  # Replace with your actual access and key codes
